@@ -6,7 +6,14 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+const replitDevDomain = process.env.REPLIT_DEV_DOMAIN;
+
 export default defineConfig({
+  vite: {
+    server: {
+      allowedHosts: replitDevDomain ? [replitDevDomain] : [],
+    },
+  },
   nitro: {
     preset: "node-server",
   },
