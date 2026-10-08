@@ -14,14 +14,14 @@ localPort = 18646
 [services.development]
 run = "pnpm --filter @workspace/premium-wallet-sync run dev"
 
-[services.production]
-build = [ "pnpm", "--filter", "@workspace/premium-wallet-sync", "run", "build" ]
-serve = "static"
-publicDir = "artifacts/premium-wallet-sync/dist/public"
+[services.production.build]
+args = ["pnpm", "--filter", "@workspace/premium-wallet-sync", "run", "build"]
 
-[[services.production.rewrites]]
-from = "/*"
-to = "/index.html"
+[services.production.run]
+args = ["pnpm", "--filter", "@workspace/premium-wallet-sync", "run", "serve"]
+
+[services.production.run.env]
+NODE_ENV = "production"
 
 [services.env]
 PORT = "18646"
