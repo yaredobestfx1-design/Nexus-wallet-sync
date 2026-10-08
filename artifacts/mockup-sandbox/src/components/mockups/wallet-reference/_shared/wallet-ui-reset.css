@@ -1,0 +1,6 @@
+/* Restores browser defaults inside the wallet so Tailwind's base reset doesn't alter the design. */
+.nw-wallet :where(h1, h2, h3, h4, p, dl, dd, ul, ol, figure, blockquote) { margin: revert; padding: revert; }
+.nw-wallet :where(h1, h2, h3, h4, strong, b, dt) { font-size: revert; font-weight: revert; }
+.nw-wallet :where(svg, img) { display: inline; vertical-align: middle; }
+.nw-wallet :where(button) { background-color: buttonface; border: revert; padding: revert; }
+.nw-wallet { line-height: normal; }

@@ -273,6 +273,10 @@ export function WalletUi({
     <div className="nw-wallet">
       <div className="nw-wallet__ambient" aria-hidden="true" />
       <main className="nw-shell">
+        <div className="nw-brandbar" aria-hidden="true">
+          <span className="nw-brandbar__mark">N</span>
+          <span className="nw-brandbar__name">Nexus</span>
+        </div>
         <header className="nw-page-heading">
           <span className="nw-page-heading__icon"><Icon name="wallet" /></span>
           <div>
@@ -531,6 +535,28 @@ export function WalletUi({
           <span>Account state is provided by the host app</span>
         </footer>
       </main>
+      <div className="nw-app-dock" aria-hidden="true">
+        <span className="nw-app-dock__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="m3.5 10 8.5-7 8.5 7v10a1 1 0 0 1-1 1h-5v-7h-5v7h-5a1 1 0 0 1-1-1z" /></svg>
+          <span>Home</span>
+        </span>
+        <span className="nw-app-dock__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19V5M4 19h17" /><path d="m7 15 4-4 3 2 5-6" /></svg>
+          <span>Terminal</span>
+        </span>
+        <span className="nw-app-dock__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="7" width="16" height="13" rx="2" /><path d="M9 7V4h6v3M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01" /></svg>
+          <span>AI</span>
+        </span>
+        <span className="nw-app-dock__item nw-app-dock__item--active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M3 9h18M16 14h2" /></svg>
+          <span>Wallet</span>
+        </span>
+        <span className="nw-app-dock__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="m20.6 13.4-8.9 8.1a2 2 0 0 1-2.8-.1L2.6 15a2 2 0 0 1-.1-2.8l8.1-8.9a2 2 0 0 1 1.5-.7h6.3a2 2 0 0 1 2 2v6.3a2 2 0 0 1-.7 1.5Z" /><circle cx="16.5" cy="7.5" r="1" /></svg>
+          <span>Plans</span>
+        </span>
+      </div>
     </div>
   );
 }
