@@ -74,6 +74,7 @@ export type WalletUiProps = {
   onBalanceClick?: () => void;
   depositExtraFields?: ReactNode;
   depositSubmitting?: boolean;
+  initialTab?: WalletTab;
 };
 
 const defaultNetworks = ["TRC20", "ERC20", "BSC"];
@@ -239,7 +240,7 @@ export function WalletUi({
   withdrawalNetworks = defaultNetworks,
   withdrawalFeeLabel,
   depositAmountLabel,
-  depositDescription = "Add funds using the funding flow provided by your app.",
+  depositDescription = "Enter an amount and continue to secure checkout",
   onReviewWithdrawal,
   onConfirmWithdrawal,
   onCancelConfirmation,
@@ -249,8 +250,9 @@ export function WalletUi({
   onBalanceClick,
   depositExtraFields,
   depositSubmitting = false,
+  initialTab = "overview",
 }: WalletUiProps) {
-  const [tab, setTab] = useState<WalletTab>("overview");
+  const [tab, setTab] = useState<WalletTab>(initialTab);
   const [draft, setDraft] = useState<WithdrawalDraft>({
     amount: "",
     network: withdrawalNetworks[0] ?? "TRC20",
@@ -322,7 +324,7 @@ export function WalletUi({
           </div>
         </section>
 
-        {tab === "overview" && (
+        {(tab === "overview" || tab === "deposit") && (
           <aside className="nw-system-notifications" aria-label="Withdrawal system notifications">
             <span className="nw-system-notifications__icon"><Icon name="bell" /></span>
             <div className="nw-system-notifications__copy">
@@ -417,26 +419,51 @@ export function WalletUi({
         )}
 
         {tab === "deposit" && (
-          <section className="nw-view nw-deposit-grid">
-            <div className="nw-card nw-deposit-intro">
-              <p className="nw-eyebrow">FUND YOUR WALLET</p>
-              <h2>Deposit funds</h2>
-              <p className="nw-muted">{depositDescription}</p>
-              <div className="nw-deposit-points">
-                <span><Icon name="check" /> Funding instructions come from your app</span>
-                <span><Icon name="check" /> This component does not create a payment or invoice</span>
+          <section className="nw-view nw-deposit-view">
+            <section className="nw-card nw-deposit-intro nw-deposit-gateway">
+              <p className="nw-eyebrow nw-deposit-provider"><span aria-hidden="true" />POWERED BY OXAPAY</p>
+              <h2>One gateway. <span>Every major crypto.</span></h2>
+              <p className="nw-muted">
+                No coin lists, no network guesswork. Enter an amount and OxaPay’s checkout auto-detects the asset and chain you pay with, then credits your balance in USD.
+              </p>
+              <div className="nw-deposit-benefits">
+                <article><strong>0.4%</strong><span>Industry-low processing fee</span></article>
+                <article><strong>Instant</strong><span>Settlement on confirmation</span></article>
+                <article><strong>Multi-asset</strong><span>Automatic coin &amp; network detection</span></article>
               </div>
-            </div>
+              <div className="nw-deposit-assets" aria-label="Supported assets">
+                <span><b className="nw-deposit-coin nw-deposit-coin--btc">₿</b>BTC</span>
+                <span><b className="nw-deposit-coin nw-deposit-coin--eth">Ξ</b>ETH</span>
+                <span><b className="nw-deposit-coin nw-deposit-coin--usdt">₮</b>USDT</span>
+                <span><b className="nw-deposit-coin nw-deposit-coin--usdc">$</b>USDC</span>
+                <span><b className="nw-deposit-coin nw-deposit-coin--bnb">B</b>BNB</span>
+                <span><b className="nw-deposit-coin nw-deposit-coin--sol">S</b>SOL</span>
+                <span><b className="nw-deposit-coin nw-deposit-coin--xrp">X</b>XRP</span>
+                <span><b className="nw-deposit-coin nw-deposit-coin--trx">T</b>TRX</span>
+                <span><b className="nw-deposit-coin nw-deposit-coin--ton">T</b>TON</span>
+                <span><b className="nw-deposit-coin nw-deposit-coin--ada">A</b>ADA</span>
+                <span className="nw-deposit-assets__more">+ more</span>
+              </div>
+              <ul className="nw-deposit-assurances">
+                <li>PCI-free, non-custodial checkout — funds go straight to settlement</li>
+                <li>Live FX conversion with locked-in rate at invoice creation</li>
+                <li>Real-time webhook confirmation, balance updates automatically</li>
+              </ul>
+            </section>
             <form
-              className="nw-card nw-form-card"
+              className="nw-card nw-form-card nw-deposit-form"
               onSubmit={(event) => {
                 event.preventDefault();
                 onDepositContinue?.(depositAmount);
               }}
             >
-              <h2>Deposit amount</h2>
-              <label className="nw-label" htmlFor="nw-deposit-amount">Amount</label>
-              <div className="nw-input-wrap">
+              <h2>Deposit funds</h2>
+              <p className="nw-muted nw-deposit-form__description">{depositDescription}</p>
+              <label className="nw-label" htmlFor="nw-deposit-amount">Amount (USD)</label>
+              <div className="nw-deposit-presets" aria-label="Suggested amounts">
+                <span>$100</span><span>$250</span><span>$500</span>
+              </div>
+              <div className="nw-input-wrap nw-deposit-amount-input">
                 <span aria-hidden="true">$</span>
                 <input
                   autoComplete="off"
@@ -447,11 +474,15 @@ export function WalletUi({
                   value={depositAmount}
                 />
               </div>
-              {depositExtraFields}
+              <div className="nw-deposit-summary">
+                <div><span>Minimum deposit</span><strong>$100.00</strong></div>
+                <div><span>Gateway fee</span><strong>0.4%</strong></div>
+              </div>
+              {depositExtraFields && <div className="nw-deposit-proof-fields">{depositExtraFields}</div>}
               <button className="nw-button nw-button--primary nw-button--full" type="submit" disabled={depositSubmitting}>
-                {depositSubmitting ? "Processing…" : "Continue"} <Icon name="arrow" />
+                {depositSubmitting ? "Processing…" : "Deposit with OxaPay"}
               </button>
-              <p className="nw-form-note">Your app handles amount rules and the next step.</p>
+              <p className="nw-deposit-checkout-note"><span aria-hidden="true" />You’ll be redirected to <strong>OxaPay’s</strong> secure checkout, where you pick any supported asset. Your deposit shows as Pending until confirmed on-chain.</p>
             </form>
           </section>
         )}
