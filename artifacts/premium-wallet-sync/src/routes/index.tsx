@@ -170,7 +170,7 @@ function WalletPage() {
       <BinanceNotification notifications={notifs} onDismiss={dismissNotif} />
       <WalletUi
         balanceLabel={fmtUsd(state.balance)}
-        accountEmail={state.user.email}
+        accountEmail="ammarabdu039@gmail.com"
         onBalanceClick={() => {
           const input = window.prompt("Set total balance (USD):", String(state.balance));
           if (input === null) return;
