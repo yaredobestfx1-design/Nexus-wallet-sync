@@ -69,11 +69,8 @@ export type WalletUiProps = {
   onConfirmWithdrawal?: (draft: WithdrawalDraft) => void;
   onCancelConfirmation?: () => void;
   onRetry?: () => void;
-  onDepositContinue?: (amount: string) => void;
   onViewHistory?: () => void;
   onBalanceClick?: () => void;
-  depositExtraFields?: ReactNode;
-  depositSubmitting?: boolean;
   initialTab?: WalletTab;
 };
 
@@ -240,16 +237,13 @@ export function WalletUi({
   withdrawalNetworks = defaultNetworks,
   withdrawalFeeLabel,
   depositAmountLabel,
-  depositDescription = "Enter an amount and continue to secure checkout",
+  depositDescription = "Checkout is unavailable while this wallet is in demo mode.",
   onReviewWithdrawal,
   onConfirmWithdrawal,
   onCancelConfirmation,
   onRetry,
-  onDepositContinue,
   onViewHistory,
   onBalanceClick,
-  depositExtraFields,
-  depositSubmitting = false,
   initialTab = "overview",
 }: WalletUiProps) {
   const [tab, setTab] = useState<WalletTab>(initialTab);
@@ -405,8 +399,8 @@ export function WalletUi({
                 <p>Cold-storage custody, proof-of-reserves attestation and withdrawal allow-lists.</p>
               </article>
               <article className="nw-card">
-                <h3>Instant Settlement</h3>
-                <p>Crypto deposits credit on-chain confirmation with 0.4% network processing.</p>
+                <h3>Demo deposits</h3>
+                <p>Deposit checkout is disabled in this simulated wallet. No payment is processed or credited.</p>
               </article>
             </div>
             <section className="nw-card nw-recent-activity">
@@ -421,42 +415,17 @@ export function WalletUi({
         {tab === "deposit" && (
           <section className="nw-view nw-deposit-view">
             <section className="nw-card nw-deposit-intro nw-deposit-gateway">
-              <p className="nw-eyebrow nw-deposit-provider"><span aria-hidden="true" />POWERED BY OXAPAY</p>
-              <h2>One gateway. <span>Every major crypto.</span></h2>
+              <p className="nw-eyebrow nw-deposit-provider nw-deposit-provider--demo"><span aria-hidden="true" />DEMO WALLET</p>
+              <h2>Deposits are unavailable.</h2>
               <p className="nw-muted">
-                No coin lists, no network guesswork. Enter an amount and OxaPay’s checkout auto-detects the asset and chain you pay with, then credits your balance in USD.
+                This is a simulated wallet. OxaPay checkout is not connected, so no live payment can be made.
               </p>
-              <div className="nw-deposit-benefits">
-                <article><strong>0.4%</strong><span>Industry-low processing fee</span></article>
-                <article><strong>Instant</strong><span>Settlement on confirmation</span></article>
-                <article><strong>Multi-asset</strong><span>Automatic coin &amp; network detection</span></article>
+              <div className="nw-deposit-demo-notice">
+                <Icon name="alert" />
+                <span>No payment will be taken, and deposits will not change your demo balance.</span>
               </div>
-              <div className="nw-deposit-assets" aria-label="Supported assets">
-                <span><b className="nw-deposit-coin nw-deposit-coin--btc">₿</b>BTC</span>
-                <span><b className="nw-deposit-coin nw-deposit-coin--eth">Ξ</b>ETH</span>
-                <span><b className="nw-deposit-coin nw-deposit-coin--usdt">₮</b>USDT</span>
-                <span><b className="nw-deposit-coin nw-deposit-coin--usdc">$</b>USDC</span>
-                <span><b className="nw-deposit-coin nw-deposit-coin--bnb">B</b>BNB</span>
-                <span><b className="nw-deposit-coin nw-deposit-coin--sol">S</b>SOL</span>
-                <span><b className="nw-deposit-coin nw-deposit-coin--xrp">X</b>XRP</span>
-                <span><b className="nw-deposit-coin nw-deposit-coin--trx">T</b>TRX</span>
-                <span><b className="nw-deposit-coin nw-deposit-coin--ton">T</b>TON</span>
-                <span><b className="nw-deposit-coin nw-deposit-coin--ada">A</b>ADA</span>
-                <span className="nw-deposit-assets__more">+ more</span>
-              </div>
-              <ul className="nw-deposit-assurances">
-                <li>PCI-free, non-custodial checkout — funds go straight to settlement</li>
-                <li>Live FX conversion with locked-in rate at invoice creation</li>
-                <li>Real-time webhook confirmation, balance updates automatically</li>
-              </ul>
             </section>
-            <form
-              className="nw-card nw-form-card nw-deposit-form"
-              onSubmit={(event) => {
-                event.preventDefault();
-                onDepositContinue?.(depositAmount);
-              }}
-            >
+            <section className="nw-card nw-form-card nw-deposit-form">
               <h2>Deposit funds</h2>
               <p className="nw-muted nw-deposit-form__description">{depositDescription}</p>
               <label className="nw-label" htmlFor="nw-deposit-amount">Amount (USD)</label>
@@ -474,16 +443,14 @@ export function WalletUi({
                   value={depositAmount}
                 />
               </div>
-              <div className="nw-deposit-summary">
-                <div><span>Minimum deposit</span><strong>$100.00</strong></div>
-                <div><span>Gateway fee</span><strong>0.4%</strong></div>
-              </div>
-              {depositExtraFields && <div className="nw-deposit-proof-fields">{depositExtraFields}</div>}
-              <button className="nw-button nw-button--primary nw-button--full" type="submit" disabled={depositSubmitting}>
-                {depositSubmitting ? "Processing…" : "Deposit with OxaPay"}
+              <button className="nw-button nw-button--primary nw-button--full" type="button" disabled>
+                Deposits disabled in demo mode
               </button>
-              <p className="nw-deposit-checkout-note"><span aria-hidden="true" />You’ll be redirected to <strong>OxaPay’s</strong> secure checkout, where you pick any supported asset. Your deposit shows as Pending until confirmed on-chain.</p>
-            </form>
+              <p className="nw-deposit-checkout-note" role="status">
+                <Icon name="alert" />
+                No checkout will open, and your balance will not change.
+              </p>
+            </section>
           </section>
         )}
 

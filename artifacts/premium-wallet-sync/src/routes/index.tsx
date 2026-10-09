@@ -12,7 +12,7 @@ import {
   type WithdrawalDraft,
   type WithdrawalView,
 } from "@/components/wallet/nexus/WalletUi";
-import { addDeposit, addWithdraw, DEPOSIT_ADDRESS, setBalance, useWallet, type Transaction } from "@/lib/wallet-store";
+import { addWithdraw, setBalance, useWallet, type Transaction } from "@/lib/wallet-store";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -128,54 +128,6 @@ function WalletPage() {
     setWithdrawalView({ step: "confirmation", draft });
   }
 
-  const [depositTxid, setDepositTxid] = useState("");
-  const [screenshot, setScreenshot] = useState<string | null>(null);
-  const [screenshotName, setScreenshotName] = useState<string | null>(null);
-  const [depositSubmitting, setDepositSubmitting] = useState(false);
-  const fileRef = useRef<HTMLInputElement>(null);
-
-  function clearScreenshot() {
-    setScreenshot(null);
-    setScreenshotName(null);
-    if (fileRef.current) fileRef.current.value = "";
-  }
-
-  function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    if (!file.type.startsWith("image/")) return void toast.error("Screenshot must be an image file");
-    if (file.size > 5 * 1024 * 1024) return void toast.error("Screenshot must be under 5MB");
-    const reader = new FileReader();
-    reader.onload = () => {
-      setScreenshot(String(reader.result));
-      setScreenshotName(file.name);
-    };
-    reader.onerror = () => toast.error("Failed to read screenshot");
-    reader.readAsDataURL(file);
-  }
-
-  async function handleDeposit(amountStr: string) {
-    const amt = Number(String(amountStr).replace(/[^0-9.]/g, ""));
-    if (depositSubmitting) return;
-    if (!(amt > 0)) return void toast.error("Enter a valid deposit amount");
-    if (!screenshot) return void toast.error("Payment screenshot is required");
-    if (depositTxid.trim().length < 10) return void toast.error("Enter a valid transaction hash");
-    setDepositSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1400));
-    const tx = addDeposit({
-      amount: amt,
-      address: DEPOSIT_ADDRESS,
-      txid: depositTxid.trim(),
-      email: state.user.email,
-      screenshot,
-    });
-    setDepositSubmitting(false);
-    setDepositTxid("");
-    clearScreenshot();
-    toast.success(`Deposit of ${amt.toLocaleString()} USDT credited`);
-    triggerNotifications(tx);
-  }
-
   async function handleConfirm(draft: WithdrawalDraft) {
     const amt = Number(draft.amount);
     if (amt > state.balance) {
@@ -227,18 +179,6 @@ function WalletPage() {
         activities={activities}
         withdrawalView={withdrawalView}
         withdrawalNetworks={NETWORKS}
-        depositSubmitting={depositSubmitting}
-        depositExtraFields={
-          <DepositProofFields
-            screenshotName={screenshotName}
-            onPickFile={handleFile}
-            onClearFile={clearScreenshot}
-            txid={depositTxid}
-            onTxid={setDepositTxid}
-            fileRef={fileRef}
-          />
-        }
-        onDepositContinue={handleDeposit}
         onReviewWithdrawal={handleReview}
         onConfirmWithdrawal={handleConfirm}
         onCancelConfirmation={() => setWithdrawalView({ step: "form" })}
@@ -247,52 +187,6 @@ function WalletPage() {
           setWithdrawalView((v) => (v.step === "success" || v.step === "error" ? { step: "form" } : v))
         }
       />
-    </>
-  );
-}
-
-function DepositProofFields({
-  screenshotName,
-  onPickFile,
-  onClearFile,
-  txid,
-  onTxid,
-  fileRef,
-}: {
-  screenshotName: string | null;
-  onPickFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onClearFile: () => void;
-  txid: string;
-  onTxid: (v: string) => void;
-  fileRef: React.RefObject<HTMLInputElement | null>;
-}) {
-  return (
-    <>
-      <label className="nw-label" htmlFor="nw-deposit-proof">Payment screenshot</label>
-      <input ref={fileRef} id="nw-deposit-proof" type="file" accept="image/*" onChange={onPickFile} style={{ display: "none" }} />
-      <div className="nw-input-wrap">
-        <span aria-hidden="true">⇪</span>
-        <input
-          readOnly
-          placeholder="Upload payment screenshot"
-          value={screenshotName ?? ""}
-          onClick={() => fileRef.current?.click()}
-          style={{ cursor: "pointer" }}
-        />
-        {screenshotName && (
-          <button className="nw-text-button" type="button" onClick={onClearFile}>Remove</button>
-        )}
-      </div>
-      <label className="nw-label" htmlFor="nw-deposit-txid">Transaction hash (TXID)</label>
-      <input
-        autoComplete="off"
-        id="nw-deposit-txid"
-        className="nw-mono"
-        placeholder="Paste transaction hash"
-        value={txid}
-        onChange={(e) => onTxid(e.target.value.trim())}
-      />
-      <div style={{ height: 17 }} />
     </>
   );
 }
