@@ -513,15 +513,33 @@ export function WalletUi({
         {tab === "deposit" && (
           <section className="nw-view nw-deposit-view">
             <section className="nw-card nw-deposit-intro nw-deposit-gateway">
-              <p className="nw-eyebrow nw-deposit-provider nw-deposit-provider--demo"><span aria-hidden="true" />DEMO WALLET</p>
-              <h2>Deposits are unavailable.</h2>
+              <p className="nw-eyebrow nw-deposit-provider nw-deposit-provider--demo"><span aria-hidden="true" />DEMO MODE · DEPOSITS OFF</p>
+              <h2>One wallet. <span>Demo-only deposits.</span></h2>
               <p className="nw-muted">
-                This is a simulated wallet. OxaPay checkout is not connected, so no live payment can be made.
+                This wallet is simulated. Live checkout is disabled, so no payment will be processed and your balance will not change.
               </p>
-              <div className="nw-deposit-demo-notice">
-                <Icon name="alert" />
-                <span>No payment will be taken, and deposits will not change your demo balance.</span>
+              <div className="nw-deposit-highlights" role="group" aria-label="Deposit status" data-testid="deposit-status-highlights">
+                <article data-testid="deposit-status-checkout">
+                  <span>CHECKOUT</span>
+                  <strong>Disabled</strong>
+                  <small>No live payment flow</small>
+                </article>
+                <article data-testid="deposit-status-proof">
+                  <span>PAYMENT PROOF</span>
+                  <strong>Not needed</strong>
+                  <small>No screenshot or TXID</small>
+                </article>
+                <article data-testid="deposit-status-balance">
+                  <span>BALANCE</span>
+                  <strong>Unchanged</strong>
+                  <small>Demo balance stays as-is</small>
+                </article>
               </div>
+              <ul className="nw-deposit-checklist" data-testid="deposit-demo-checklist">
+                <li><span aria-hidden="true">✓</span> No payment will be collected</li>
+                <li><span aria-hidden="true">✓</span> No proof fields are required</li>
+                <li><span aria-hidden="true">✓</span> Deposits will not change your demo balance</li>
+              </ul>
             </section>
             <section className="nw-card nw-form-card nw-deposit-form">
               <h2>Deposit funds</h2>
@@ -535,18 +553,23 @@ export function WalletUi({
                 <input
                   autoComplete="off"
                   id="nw-deposit-amount"
+                  data-testid="input-deposit-amount"
                   inputMode="decimal"
                   onChange={(event) => setDepositAmount(event.target.value)}
                   placeholder="Enter amount"
                   value={depositAmount}
                 />
               </div>
-              <button className="nw-button nw-button--primary nw-button--full" type="button" disabled>
+              <div className="nw-deposit-status-rows" role="group" aria-label="Deposit details" data-testid="deposit-status-details">
+                <div><span>Checkout status</span><strong>Disabled</strong></div>
+                <div><span>Wallet mode</span><strong>Demo only</strong></div>
+              </div>
+              <button className="nw-button nw-button--primary nw-button--full" type="button" disabled data-testid="button-deposit-submit">
                 Deposits disabled in demo mode
               </button>
-              <p className="nw-deposit-checkout-note" role="status">
-                <Icon name="alert" />
-                No checkout will open, and your balance will not change.
+              <p className="nw-deposit-checkout-note" role="status" data-testid="status-deposit-demo">
+                <span aria-hidden="true" />
+                No payment checkout will open, and your balance will not change.
               </p>
             </section>
           </section>

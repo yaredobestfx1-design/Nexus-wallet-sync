@@ -1,2 +1,2 @@
 - [Wallet overview content](wallet-overview-content.md) — screenshot marketing claims are user-approved; production balance and activity stay app-sourced.
-- [Wallet deposit reference copy](wallet-deposit-reference-copy.md) — OxaPay, minimum, and fee claims are presentation-only; the existing manual proof flow remains unchanged.
+- [Wallet deposit reference copy](wallet-deposit-reference-copy.md) — deposits stay disabled in demo mode; avoid unverified checkout, minimum, fee, or proof claims.
