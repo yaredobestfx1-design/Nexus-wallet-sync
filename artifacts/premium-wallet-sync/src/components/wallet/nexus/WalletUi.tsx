@@ -56,6 +56,7 @@ export type WalletNotificationPreview = {
 
 export type WalletUiProps = {
   balanceLabel: string;
+  accountEmail?: string;
   balanceCaption?: string;
   balanceState?: "ready" | "loading" | "unavailable";
   activities?: WalletActivity[];
@@ -309,6 +310,7 @@ function NotificationPreview({ preview }: { preview: WalletNotificationPreview }
 
 export function WalletUi({
   balanceLabel,
+  accountEmail,
   balanceCaption = "Available balance",
   balanceState = "ready",
   activities = [],
@@ -400,7 +402,8 @@ export function WalletUi({
               {balanceState === "loading" ? "Loading…" : balanceState === "unavailable" ? "Unavailable" : balanceLabel}
             </p>
             <p className="nw-muted nw-balance-card__caption">
-              Available in your account · balance supplied by the host app
+              Persistent Terminal balance · available for trading and withdrawals
+              {accountEmail && <span className="nw-balance-card__account"> · {accountEmail}</span>}
             </p>
           </div>
           <div className="nw-balance-card__actions">

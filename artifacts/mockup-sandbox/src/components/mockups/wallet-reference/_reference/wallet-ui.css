@@ -382,16 +382,16 @@
 }
 .nw-brandbar__mark {
   display: grid;
-  width: 35px;
-  height: 35px;
+  width: 38px;
+  height: 38px;
   place-items: center;
-  border: 1px solid var(--nw-border-strong);
+  border: 1px solid rgba(89, 215, 243, .78);
   border-radius: 12px;
   color: var(--nw-cyan);
-  box-shadow: inset 0 0 18px rgba(89, 215, 243, .11), 0 0 18px rgba(89, 215, 243, .08);
+  box-shadow: inset 0 0 18px rgba(89, 215, 243, .12), 0 0 18px rgba(89, 215, 243, .2);
   font: 700 14px/1 Inter, ui-sans-serif, system-ui, sans-serif;
 }
-.nw-brandbar__name { font-size: 17px; font-weight: 750; letter-spacing: -.04em; }
+.nw-brandbar__name { font-size: 20px; font-weight: 800; letter-spacing: -.04em; }
 .nw-page-heading { gap: 13px; }
 .nw-page-heading__icon { width: 49px; height: 49px; border-radius: 14px; color: var(--nw-cyan); background: rgba(89, 215, 243, .09); }
 .nw-page-heading h1 { font-family: inherit; font-size: 27px; font-weight: 760; letter-spacing: -.045em; }
@@ -409,7 +409,8 @@
   box-shadow: 0 15px 40px rgba(0, 0, 0, .17), inset 0 1px rgba(255, 255, 255, .025);
 }
 .nw-balance { margin-top: 4px; font-size: clamp(36px, 9vw, 48px); letter-spacing: -.06em; }
-.nw-balance-card__caption { max-width: 520px; margin-top: 7px; font-size: 12px; }
+.nw-balance-card__caption { max-width: 520px; margin-top: 7px; font-size: 13px; line-height: 1.45; }
+.nw-balance-card__account { white-space: nowrap; }
 .nw-balance-card__actions { gap: 9px; }
 .nw-button {
   min-height: 44px;
@@ -483,7 +484,7 @@
 
 @media (max-width: 720px) {
   .nw-shell { width: 100%; max-width: 1180px; padding: 25px 14px calc(112px + env(safe-area-inset-bottom)); }
-  .nw-brandbar { height: 58px; margin: 0 -14px 27px; padding: 0 14px; background: rgba(7, 13, 24, .62); }
+  .nw-brandbar { height: 72px; margin: -25px -14px 38px; padding: 0 18px; background: rgba(7, 13, 24, .62); }
   .nw-page-heading__icon { width: 49px; height: 49px; }
   .nw-balance-card { gap: 17px; padding: 25px 28px; }
   .nw-balance-card__actions { grid-template-columns: 1fr 1fr; }
@@ -528,9 +529,8 @@
 }
 @media (max-width: 460px) {
   .nw-shell { padding-right: 11px; padding-left: 11px; }
-  .nw-brandbar { margin-right: -11px; margin-left: -11px; padding-right: 11px; padding-left: 11px; }
+  .nw-brandbar { margin-right: -11px; margin-left: -11px; padding-right: 18px; padding-left: 18px; }
   .nw-tabs { margin-right: -11px; margin-left: -11px; }
-  .nw-brandbar { margin-right: -18px; margin-left: -18px; }
   .nw-page-heading { align-items: center; }
   .nw-page-heading .nw-muted { max-width: 280px; }
   .nw-balance-card__actions { grid-template-columns: 1fr 1fr; }
