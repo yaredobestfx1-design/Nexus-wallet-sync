@@ -75,6 +75,30 @@ export type WalletUiProps = {
 };
 
 const defaultNetworks = ["TRC20", "ERC20", "BSC"];
+const networkChainNames: Record<string, string> = {
+  TRC20: "Tron",
+  ERC20: "Ethereum",
+  BEP20: "BNB Smart Chain",
+  BTC: "Bitcoin",
+  LTC: "Litecoin",
+  BCH: "Bitcoin Cash",
+  DOGE: "Dogecoin",
+  SOL: "Solana",
+  MATIC: "Polygon",
+  ARBITRUM: "Arbitrum One",
+  OPTIMISM: "Optimism",
+  AVAXC: "Avalanche C-Chain",
+  BASE: "Base",
+  TON: "The Open Network",
+  XRP: "XRP Ledger",
+  ADA: "Cardano",
+  DOT: "Polkadot",
+  NEAR: "NEAR Protocol",
+  ATOM: "Cosmos Hub",
+  ALGO: "Algorand",
+  XLM: "Stellar",
+  FTM: "Fantom Opera",
+};
 
 const statusCopy: Record<WalletNotificationPreview["status"], string> = {
   pending: "pending",
@@ -318,7 +342,7 @@ export function WalletUi({
           </div>
         </section>
 
-        {(tab === "overview" || tab === "deposit") && (
+        {(tab === "overview" || tab === "deposit" || tab === "withdraw") && (
           <aside className="nw-system-notifications" aria-label="Withdrawal system notifications">
             <span className="nw-system-notifications__icon"><Icon name="bell" /></span>
             <div className="nw-system-notifications__copy">
@@ -458,12 +482,19 @@ export function WalletUi({
           <section className="nw-view">
             {withdrawalView.step === "form" && (
               <form className="nw-card nw-form-card nw-withdraw-form" onSubmit={submitForReview}>
-                <div className="nw-form-heading">
-                  <div><p className="nw-eyebrow">SEND FUNDS</p><h2>Withdraw USDT</h2></div>
-                  <span className="nw-token-mark">₮</span>
+                <h2>Withdraw USDT</h2>
+                <p className="nw-muted nw-withdraw-subtitle">Send USDT to an external wallet.</p>
+                <div className="nw-available-line">
+                  <span>Available balance:</span>
+                  <strong>{balanceLabel.startsWith("$") ? `${balanceLabel.slice(1)} USD` : balanceLabel}</strong>
                 </div>
-                <p className="nw-muted">Send USDT to an external wallet.</p>
-                <div className="nw-available-line"><span>Available balance</span><strong>{balanceLabel}</strong></div>
+                <span className="nw-label" id="nw-asset-label">Asset</span>
+                <div className="nw-static-select" aria-labelledby="nw-asset-label">
+                  <span>USDT — Tether</span>
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </div>
                 <label className="nw-label" htmlFor="nw-network">Network</label>
                 <select
                   id="nw-network"
@@ -472,12 +503,13 @@ export function WalletUi({
                 >
                   {withdrawalNetworks.map((network) => <option key={network} value={network}>{network}</option>)}
                 </select>
+                <p className="nw-muted nw-network-chain">{networkChainNames[draft.network] ?? draft.network}</p>
                 <label className="nw-label" htmlFor="nw-address">Destination address</label>
                 <input
                   autoComplete="off"
                   id="nw-address"
                   onChange={(event) => setDraft((current) => ({ ...current, address: event.target.value }))}
-                  placeholder="Paste wallet address"
+                  placeholder="Paste USDT wallet address"
                   value={draft.address}
                 />
                 <label className="nw-label" htmlFor="nw-withdraw-amount">Amount (USDT)</label>
@@ -492,14 +524,23 @@ export function WalletUi({
                     value={draft.amount}
                   />
                 </div>
+                <div className="nw-withdraw-request">
+                  <div className="nw-withdraw-request__top">
+                    <span>Requested withdrawal</span>
+                    <strong>{draft.amount.trim() ? `${draft.amount} USDT` : "—"}</strong>
+                  </div>
+                  <p>The requested amount is deducted from this shared balance when accepted. The 15% fee is paid separately.</p>
+                </div>
                 {withdrawalFeeLabel && (
                   <div className="nw-fee-row"><span>Fee estimate</span><strong>{withdrawalFeeLabel}</strong></div>
                 )}
+                <p className="nw-withdraw-warning">
+                  Double-check the network and address. Withdrawals sent to the wrong network cannot be recovered.
+                </p>
                 {withdrawalView.errorMessage && <p className="nw-inline-error" role="alert">{withdrawalView.errorMessage}</p>}
                 <button className="nw-button nw-button--primary nw-button--full" type="submit">
-                  Review withdrawal <Icon name="arrow" />
+                  Confirm Withdrawal
                 </button>
-                <p className="nw-form-note">The host app validates and submits withdrawal requests.</p>
               </form>
             )}
 

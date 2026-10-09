@@ -191,11 +191,51 @@
 .nw-form-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
 .nw-form-heading h2 { margin: 4px 0 0; font-size: 19px; }
 .nw-token-mark { width: 39px; height: 39px; border-radius: 50%; color: #69e4c0; border-color: rgba(105, 228, 192, .28); background: rgba(38, 161, 123, .17); font-size: 21px; font-weight: 800; }
-.nw-withdraw-form > .nw-muted { margin: 7px 0 15px; font-size: 11px; }
+.nw-withdraw-form { padding: 22px; }
+.nw-withdraw-form > h2 { margin: 0; }
+.nw-withdraw-subtitle { margin: 4px 0 14px !important; font-size: 12px; }
 .nw-available-line,
 .nw-fee-row { display: flex; justify-content: space-between; gap: 12px; padding: 12px; border: 1px solid var(--nw-border); border-radius: 9px; color: var(--nw-muted); background: rgba(4, 12, 22, .38); font-size: 11px; }
 .nw-available-line strong,
 .nw-fee-row strong { color: var(--nw-text); font-family: "JetBrains Mono", ui-monospace, monospace; }
+.nw-withdraw-form .nw-available-line { justify-content: flex-start; gap: 7px; margin-bottom: 2px; padding: 13px; font-family: "JetBrains Mono", ui-monospace, monospace; }
+.nw-withdraw-form .nw-available-line strong { font-weight: 600; }
+.nw-static-select {
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 14px;
+  border: 1px solid var(--nw-border);
+  border-radius: 9px;
+  color: var(--nw-text);
+  background: rgba(4, 12, 22, .58);
+  font: 600 14px "JetBrains Mono", ui-monospace, monospace;
+}
+.nw-static-select svg { color: var(--nw-muted); }
+.nw-network-chain { margin: 5px 0 0 !important; font-size: 11px; }
+.nw-withdraw-request {
+  margin-top: 16px;
+  padding: 13px;
+  border: 1px solid rgba(130, 183, 210, .12);
+  border-radius: 9px;
+  background: rgba(4, 12, 22, .34);
+}
+.nw-withdraw-request__top { display: flex; justify-content: space-between; gap: 12px; color: var(--nw-muted); font: 11px "JetBrains Mono", ui-monospace, monospace; }
+.nw-withdraw-request__top strong { color: var(--nw-text); font-weight: 500; }
+.nw-withdraw-request p { margin: 13px 0 0 !important; color: var(--nw-muted); font: 11px/1.55 "JetBrains Mono", ui-monospace, monospace; }
+.nw-withdraw-warning {
+  margin: 12px 0 0 !important;
+  padding: 12px 13px;
+  border: 1px solid rgba(224, 171, 75, .32);
+  border-radius: 9px;
+  color: #e8bf72;
+  background: rgba(170, 116, 37, .09);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.nw-withdraw-form .nw-button--full { min-height: 49px; margin-top: 19px; border-radius: 7px; font-size: 14px; }
 .nw-label { display: block; margin: 17px 0 7px; color: var(--nw-muted); font: 700 10px "JetBrains Mono", ui-monospace, monospace; letter-spacing: .13em; text-transform: uppercase; }
 .nw-wallet input,
 .nw-wallet select { width: 100%; min-height: 45px; padding: 0 12px; border: 1px solid var(--nw-border); border-radius: 9px; outline: none; color: var(--nw-text); background: rgba(4, 12, 22, .58); }
@@ -674,6 +714,8 @@
   .nw-activity--overview { gap: 10px; }
   .nw-activity--overview .nw-activity__main span { max-width: none; font-size: 10px; white-space: nowrap; }
   .nw-activity--overview .nw-amount { font-size: 13px; }
+  .nw-withdraw-form { padding: 21px; }
+  .nw-static-select { min-height: 50px; }
 }
 @media (min-width: 390px) and (max-width: 720px) {
   .nw-tabs { overflow-x: auto; }
