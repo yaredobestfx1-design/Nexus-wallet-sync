@@ -491,6 +491,7 @@
   .nw-button { min-height: 44px; padding-right: 10px; padding-left: 10px; font-size: 12px; }
   .nw-tabs { margin: 22px -14px 0; padding: 0 10px; }
   .nw-tab { min-height: 45px; padding: 0 13px; font-size: 9px; }
+  .nw-tab svg { width: 14px; height: 14px; }
   .nw-view { margin-top: 16px; }
   .nw-card { padding: 18px; }
   .nw-overview__intro { gap: 16px; }
@@ -531,6 +532,7 @@
   .nw-shell { padding-right: 11px; padding-left: 11px; }
   .nw-brandbar { margin-right: -11px; margin-left: -11px; padding-right: 18px; padding-left: 18px; }
   .nw-tabs { margin-right: -11px; margin-left: -11px; }
+  .nw-tab svg { width: 14px; height: 14px; }
   .nw-page-heading { align-items: center; }
   .nw-page-heading .nw-muted { max-width: 280px; }
   .nw-balance-card__actions { grid-template-columns: 1fr 1fr; }
