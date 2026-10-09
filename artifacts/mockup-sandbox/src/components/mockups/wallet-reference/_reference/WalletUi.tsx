@@ -100,6 +100,29 @@ const networkChainNames: Record<string, string> = {
   FTM: "Fantom Opera",
 };
 
+const historyNetworkRows = [
+  { network: "TRC20", chain: "Tron", confirmation: "~2 min" },
+  { network: "ERC20", chain: "Ethereum", confirmation: "~5 min" },
+  { network: "BSC", chain: "BNB Smart Chain", confirmation: "~1 min" },
+  { network: "BEP20", chain: "BNB Smart Chain", confirmation: "~1 min" },
+  { network: "BEP2", chain: "BNB Beacon Chain", confirmation: "~1 min" },
+  { network: "Bitcoin", chain: "Bitcoin", confirmation: "~30 min" },
+  { network: "Lightning", chain: "Bitcoin (L2)", confirmation: "~seconds" },
+  { network: "Arbitrum", chain: "Arbitrum One", confirmation: "~3 min" },
+  { network: "Base", chain: "Base", confirmation: "~3 min" },
+  { network: "Solana", chain: "Solana", confirmation: "~30 sec" },
+  { network: "XRP Ledger", chain: "XRP Ledger", confirmation: "~10 sec" },
+  { network: "TON", chain: "The Open Network", confirmation: "~15 sec" },
+  { network: "Cardano", chain: "Cardano", confirmation: "~5 min" },
+  { network: "Dogecoin", chain: "Dogecoin", confirmation: "~10 min" },
+  { network: "Litecoin", chain: "Litecoin", confirmation: "~10 min" },
+  { network: "Polygon", chain: "Polygon PoS", confirmation: "~2 min" },
+  { network: "Polkadot", chain: "Polkadot", confirmation: "~1 min" },
+  { network: "C-Chain", chain: "Avalanche", confirmation: "~2 min" },
+] as const;
+
+const historyCategoryLabels = ["All", "Deposit", "License", "Withdrawal fee"];
+
 const statusCopy: Record<WalletNotificationPreview["status"], string> = {
   pending: "pending",
   completed: "completed",
@@ -194,6 +217,39 @@ function ActivityList({ items, overview = false }: { items: WalletActivity[]; ov
           </div>
         </article>
       ))}
+    </div>
+  );
+}
+
+function HistoryActivityTable({ items }: { items: WalletActivity[] }) {
+  return (
+    <div className="nw-history-table-scroll" role="region" aria-label="Transaction history table" tabIndex={0}>
+      <table className="nw-history-table">
+        <thead>
+          <tr>
+            <th scope="col">Description</th>
+            <th scope="col">Type</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.length === 0 ? (
+            <tr><td className="nw-history-table__empty" colSpan={4}><EmptyActivity /></td></tr>
+          ) : (
+            items.map((item) => (
+              <tr key={item.id}>
+                <td className="nw-history-table__description">{item.title}</td>
+                <td className="nw-history-table__type">{item.kindLabel}</td>
+                <td className="nw-history-table__amount">
+                  <span className={`nw-amount nw-amount--${item.tone ?? "neutral"}`}>{item.amountLabel}</span>
+                </td>
+                <td className="nw-history-table__status"><StatusPill status={item.status} /></td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -616,11 +672,52 @@ export function WalletUi({
         )}
 
         {tab === "history" && (
-          <section className="nw-view nw-card">
-            <div className="nw-section-heading">
-              <div><p className="nw-eyebrow">ACCOUNT</p><h2>Wallet activity</h2><p className="nw-muted">Transaction history supplied by the host app.</p></div>
-            </div>
-            <ActivityList items={activities} />
+          <section className="nw-view nw-history">
+            <section className="nw-card nw-network-fees">
+              <div className="nw-section-heading">
+                <div>
+                  <h2>Network fees</h2>
+                  <p className="nw-muted">What each network charges for deposits &amp; withdrawals</p>
+                </div>
+              </div>
+              <div className="nw-history-table-scroll" role="region" aria-label="Network fees and average confirmation times" tabIndex={0}>
+                <table className="nw-history-table nw-network-fees__table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Network</th>
+                      <th scope="col">Chain</th>
+                      <th scope="col">Avg. confirmation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {historyNetworkRows.map((row) => (
+                      <tr key={row.network}>
+                        <td className="nw-network-fees__network">{row.network}</td>
+                        <td className="nw-network-fees__chain">{row.chain}</td>
+                        <td className="nw-network-fees__confirmation">{row.confirmation}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section className="nw-card nw-transaction-history">
+              <div className="nw-section-heading">
+                <div>
+                  <h2>Transaction history</h2>
+                  <p className="nw-muted">Your deposits, withdrawals &amp; executed orders</p>
+                </div>
+              </div>
+              <div className="nw-history-filters" aria-hidden="true">
+                {historyCategoryLabels.map((label, index) => (
+                  <span className={`nw-history-filter${index === 0 ? " nw-history-filter--active" : ""}`} key={label}>
+                    {label}
+                  </span>
+                ))}
+              </div>
+              <HistoryActivityTable items={activities} />
+            </section>
           </section>
         )}
 
