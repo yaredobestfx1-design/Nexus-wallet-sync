@@ -89,7 +89,7 @@ function Icon({
   name,
   className = "",
 }: {
-  name: "wallet" | "overview" | "deposit" | "withdraw" | "history" | "arrow" | "check" | "alert" | "close";
+  name: "wallet" | "overview" | "deposit" | "withdraw" | "history" | "arrow" | "check" | "alert" | "close" | "bell" | "activity";
   className?: string;
 }) {
   const paths: Record<typeof name, ReactNode> = {
@@ -102,6 +102,8 @@ function Icon({
     check: <><path d="m5 12 4 4L19 6" /></>,
     alert: <><path d="M12 3 2.8 19h18.4L12 3Z" /><path d="M12 9v4" /><path d="M12 16h.01" /></>,
     close: <><path d="m6 6 12 12M18 6 6 18" /></>,
+    bell: <><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" /><path d="M10 21h4" /></>,
+    activity: <><path d="m16 3 4 4-4 4" /><path d="M20 7H4" /><path d="m8 21-4-4 4-4" /><path d="M4 17h16" /></>,
   };
 
   return (
@@ -144,23 +146,29 @@ function EmptyActivity() {
   );
 }
 
-function ActivityList({ items }: { items: WalletActivity[] }) {
+function ActivityList({ items, overview = false }: { items: WalletActivity[]; overview?: boolean }) {
   if (items.length === 0) return <EmptyActivity />;
 
   return (
     <div className="nw-activity-list">
       {items.map((item) => (
-        <article className="nw-activity" key={item.id}>
+        <article className={`nw-activity${overview ? " nw-activity--overview" : ""}`} key={item.id}>
           <span className={`nw-activity__icon nw-activity__icon--${item.tone ?? "neutral"}`}>
-            {item.tone === "positive" ? <Icon name="deposit" /> : <Icon name="history" />}
+            {item.tone === "positive" ? <Icon name="deposit" /> : overview ? <Icon name="activity" /> : <Icon name="history" />}
           </span>
           <div className="nw-activity__main">
             <strong>{item.title}</strong>
-            <span>{item.kindLabel} · {item.dateLabel}</span>
+            {overview ? (
+              <span aria-label={`${item.kindLabel} · ${item.dateLabel} · ${item.status}`}>
+                {item.dateLabel} · {item.status}
+              </span>
+            ) : (
+              <span>{item.kindLabel} · {item.dateLabel}</span>
+            )}
           </div>
           <div className="nw-activity__end">
             <strong className={`nw-amount nw-amount--${item.tone ?? "neutral"}`}>{item.amountLabel}</strong>
-            <StatusPill status={item.status} />
+            {!overview && <StatusPill status={item.status} />}
           </div>
         </article>
       ))}
@@ -274,15 +282,23 @@ export function WalletUi({
       <div className="nw-wallet__ambient" aria-hidden="true" />
       <main className="nw-shell">
         <div className="nw-brandbar" aria-hidden="true">
-          <span className="nw-brandbar__mark">N</span>
-          <span className="nw-brandbar__name">Nexus</span>
+          <div className="nw-brandbar__identity">
+            <span className="nw-brandbar__mark">N</span>
+            <span className="nw-brandbar__name">Nexus</span>
+          </div>
+          <div className="nw-brandbar__controls">
+            <span className="nw-brandbar__social">Social</span>
+            <span className="nw-brandbar__account">
+              <span className="nw-brandbar__avatar">A</span>
+              <span className="nw-brandbar__handle">ammarabdu...</span>
+            </span>
+          </div>
         </div>
         <header className="nw-page-heading">
           <span className="nw-page-heading__icon"><Icon name="wallet" /></span>
           <div>
-            <p className="nw-eyebrow">ACCOUNT</p>
             <h1>Wallet</h1>
-            <p className="nw-muted">Manage balances, deposits, withdrawals, and activity.</p>
+            <p className="nw-muted">Manage your balances, deposits, and withdrawals.</p>
           </div>
         </header>
 
@@ -306,6 +322,19 @@ export function WalletUi({
           </div>
         </section>
 
+        {tab === "overview" && (
+          <aside className="nw-system-notifications" aria-label="Withdrawal system notifications">
+            <span className="nw-system-notifications__icon"><Icon name="bell" /></span>
+            <div className="nw-system-notifications__copy">
+              <strong>Withdrawal system notifications</strong>
+              <p>System notifications are not configured on the server yet.</p>
+            </div>
+            <button className="nw-system-notifications__button" type="button" disabled>
+              <Icon name="bell" /> Enable notifications
+            </button>
+          </aside>
+        )}
+
         <nav className="nw-tabs" aria-label="Wallet sections">
           {navItems.map((item) => (
             <button
@@ -328,35 +357,61 @@ export function WalletUi({
 
         {tab === "overview" && (
           <section className="nw-view nw-overview">
-            <div className="nw-overview__intro nw-card">
-              <div>
-                <p className="nw-eyebrow">WALLET OVERVIEW</p>
-                <h2>Your funds, at a glance</h2>
-                <p className="nw-muted">Wallet figures and account activity are provided by your application.</p>
+            <section className="nw-card nw-overview__hero">
+              <p className="nw-eyebrow">EXCHANGE &amp; LIQUIDITY NETWORK</p>
+              <h2>Institutional-grade liquidity, routed across 40+ venues in real time</h2>
+              <p className="nw-muted">
+                Deep books, sub-millisecond routing and audited reserves — the same execution stack used by desks trading nine figures a day.
+              </p>
+              <div className="nw-overview__metrics">
+                <article className="nw-overview__metric">
+                  <span>24H VOLUME</span>
+                  <strong>$1.42B+</strong>
+                  <small>Aggregated across venues</small>
+                </article>
+                <article className="nw-overview__metric">
+                  <span>MATCH LATENCY</span>
+                  <strong>&lt;2.4ms</strong>
+                  <small>Colocated matching engine</small>
+                </article>
+                <article className="nw-overview__metric">
+                  <span>MAKER / TAKER</span>
+                  <strong>0.02% / 0.06%</strong>
+                  <small>Volume-tiered pricing</small>
+                </article>
+                <article className="nw-overview__metric">
+                  <span>PROOF OF RESERVES</span>
+                  <strong>1:1 Backed</strong>
+                  <small>Merkle-audited monthly</small>
+                </article>
               </div>
-              <div className="nw-overview__balance">
-                <span>Total available</span>
-                <strong>{balanceState === "ready" ? balanceLabel : balanceState === "loading" ? "Loading…" : "Unavailable"}</strong>
-              </div>
-            </div>
-            <div className="nw-overview__actions">
-              <button className="nw-action-card" type="button" onClick={() => selectTab("deposit")}>
-                <span className="nw-action-card__icon nw-action-card__icon--positive"><Icon name="deposit" /></span>
-                <span><strong>Add funds</strong><small>Open your app’s deposit flow</small></span>
-                <Icon name="arrow" className="nw-action-card__arrow" />
+              <button
+                className="nw-button nw-button--primary nw-overview__cta"
+                type="button"
+                onClick={() => selectTab("deposit")}
+              >
+                Fund Account &amp; Start Trading <Icon name="arrow" />
               </button>
-              <button className="nw-action-card" type="button" onClick={() => selectTab("withdraw")}>
-                <span className="nw-action-card__icon"><Icon name="withdraw" /></span>
-                <span><strong>Withdraw</strong><small>Start a withdrawal request</small></span>
-                <Icon name="arrow" className="nw-action-card__arrow" />
-              </button>
+            </section>
+            <div className="nw-overview__features">
+              <article className="nw-card">
+                <h3>Global Liquidity</h3>
+                <p>Smart order routing sweeps 40+ exchanges to fill at the best available price.</p>
+              </article>
+              <article className="nw-card">
+                <h3>Institutional Security</h3>
+                <p>Cold-storage custody, proof-of-reserves attestation and withdrawal allow-lists.</p>
+              </article>
+              <article className="nw-card">
+                <h3>Instant Settlement</h3>
+                <p>Crypto deposits credit on-chain confirmation with 0.4% network processing.</p>
+              </article>
             </div>
-            <section className="nw-card">
+            <section className="nw-card nw-recent-activity">
               <div className="nw-section-heading">
-                <div><h2>Recent activity</h2><p className="nw-muted">Latest wallet entries supplied by the host app.</p></div>
-                <button className="nw-text-button" type="button" onClick={() => selectTab("history")}>View history <Icon name="arrow" /></button>
+                <div><h2>Recent activity</h2><p className="nw-muted">Latest deposits, payments &amp; license activations</p></div>
               </div>
-              <ActivityList items={activities.slice(0, 5)} />
+              <ActivityList items={activities.slice(0, 5)} overview />
             </section>
           </section>
         )}
@@ -531,8 +586,11 @@ export function WalletUi({
         )}
 
         <footer className="nw-footer">
-          <span>Wallet interface</span>
-          <span>Account state is provided by the host app</span>
+          <span className="nw-footer__brand">
+            <span className="nw-footer__mark">N</span>
+            <strong>Nexus</strong>
+          </span>
+          <span className="nw-footer__copy">© 2026 Nexus Terminal. Simulated demo environment for illustrative purposes.</span>
         </footer>
       </main>
       <div className="nw-app-dock" aria-hidden="true">
