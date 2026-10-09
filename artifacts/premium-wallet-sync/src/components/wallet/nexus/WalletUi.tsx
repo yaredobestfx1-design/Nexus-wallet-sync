@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import "./wallet-ui-reset.css";
 import "./wallet-ui.css";
 
@@ -327,6 +327,7 @@ export function WalletUi({
   initialTab = "overview",
 }: WalletUiProps) {
   const [tab, setTab] = useState<WalletTab>(initialTab);
+  const tabNavRef = useRef<HTMLElement | null>(null);
   const [draft, setDraft] = useState<WithdrawalDraft>({
     amount: "",
     network: withdrawalNetworks[0] ?? "TRC20",
@@ -335,6 +336,20 @@ export function WalletUi({
   const [depositAmount, setDepositAmount] = useState(depositAmountLabel ?? "");
   const visibleDraft = withdrawalView.draft ?? draft;
   const receipt = withdrawalView.receipt;
+
+  useEffect(() => {
+    const navigation = tabNavRef.current;
+    const activeTab = navigation?.querySelector<HTMLElement>(".nw-tab--active");
+    if (!navigation || !activeTab) return;
+
+    const activeLeft = activeTab.offsetLeft;
+    const activeRight = activeLeft + activeTab.offsetWidth;
+    if (activeLeft < navigation.scrollLeft) {
+      navigation.scrollTo({ left: activeLeft, behavior: "auto" });
+    } else if (activeRight > navigation.scrollLeft + navigation.clientWidth) {
+      navigation.scrollTo({ left: activeRight - navigation.clientWidth, behavior: "auto" });
+    }
+  }, [tab]);
 
   const selectTab = (next: WalletTab) => {
     setTab(next);
@@ -411,7 +426,7 @@ export function WalletUi({
           </aside>
         )}
 
-        <nav className="nw-tabs" aria-label="Wallet sections">
+        <nav className="nw-tabs" aria-label="Wallet sections" ref={tabNavRef}>
           {navItems.map((item) => (
             <button
               aria-current={tab === item.id ? "page" : undefined}

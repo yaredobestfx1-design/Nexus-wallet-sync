@@ -539,8 +539,9 @@
   .nw-activity__end .nw-status { font-size: 8px; }
 }
 @media (min-width: 390px) and (max-width: 720px) {
-  .nw-tabs { overflow-x: hidden; }
-  .nw-tab { min-width: 0; flex: 1 1 0; gap: 6px; padding-right: 4px; padding-left: 4px; letter-spacing: .065em; }
+  .nw-tabs { overflow-x: auto; scrollbar-width: none; }
+  .nw-tabs::-webkit-scrollbar { display: none; }
+  .nw-tab { min-width: max-content; flex: 0 0 auto; gap: 6px; padding-right: 4px; padding-left: 4px; letter-spacing: .065em; }
 }
 
 /* Reference-matched Nexus overview. */
@@ -891,7 +892,7 @@
 .nw-history-table-scroll::-webkit-scrollbar-thumb { border-radius: 4px; background: #46545d; }
 .nw-history-table {
   width: 100%;
-  min-width: 430px;
+  min-width: 380px;
   border-collapse: collapse;
   table-layout: fixed;
 }
@@ -905,13 +906,13 @@
   white-space: nowrap;
 }
 .nw-history-table th:nth-child(1),
-.nw-history-table td:nth-child(1) { width: 39%; }
+.nw-history-table td:nth-child(1) { width: 37%; }
 .nw-history-table th:nth-child(2),
 .nw-history-table td:nth-child(2) { width: 24%; }
 .nw-history-table th:nth-child(3),
 .nw-history-table td:nth-child(3) { width: 19%; }
 .nw-history-table th:nth-child(4),
-.nw-history-table td:nth-child(4) { width: 18%; }
+.nw-history-table td:nth-child(4) { width: 20%; }
 .nw-history-table td {
   padding: 12px 8px;
   border-top: 1px solid rgba(124, 174, 192, .09);
@@ -955,13 +956,13 @@
   color: var(--nw-red);
   background: rgba(255, 112, 133, .09);
 }
-.nw-network-fees__table { min-width: 430px; }
+.nw-network-fees__table { min-width: 360px; }
 .nw-network-fees__table th:nth-child(1),
 .nw-network-fees__table td:nth-child(1) { width: 28%; }
 .nw-network-fees__table th:nth-child(2),
-.nw-network-fees__table td:nth-child(2) { width: 44%; }
+.nw-network-fees__table td:nth-child(2) { width: 39%; }
 .nw-network-fees__table th:nth-child(3),
-.nw-network-fees__table td:nth-child(3) { width: 28%; }
+.nw-network-fees__table td:nth-child(3) { width: 33%; }
 .nw-network-fees__table td { padding-top: 10px; padding-bottom: 10px; }
 .nw-network-fees__network {
   color: #e6edf3;
