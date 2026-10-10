@@ -17,9 +17,9 @@ import { addWithdraw, setBalance, useWallet, type Transaction } from "@/lib/wall
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Wallet — Bloomberg Trading AI" },
+      { title: "Nexus Terminal — Wallet" },
       { name: "description", content: "Manage your balance, deposits, withdrawals and activity." },
-      { property: "og:title", content: "Wallet — Bloomberg Trading AI" },
+      { property: "og:title", content: "Nexus Terminal — Wallet" },
       { property: "og:description", content: "Manage your balance, deposits, withdrawals and activity." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

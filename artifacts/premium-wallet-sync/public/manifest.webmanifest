@@ -1,6 +1,6 @@
 {
-  "name": "Bloomberg Wallet",
-  "short_name": "Wallet",
+  "name": "Nexus Terminal",
+  "short_name": "Nexus Terminal",
   "description": "Institutional Grade Liquidity Management",
   "start_url": "/",
   "display": "standalone",
