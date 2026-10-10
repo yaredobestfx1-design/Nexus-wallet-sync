@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="364" height="160" viewBox="-32 -32 364 160">
+  <title>Nexus</title>
+  <defs>
+    <linearGradient id="nexus-mark-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="55%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    
+      
+      
+      
+    
+  </defs>
+  <g>
+    <rect x="1" y="1" width="94" height="94" rx="24" fill="url(#nexus-mark-gradient)"/>
+    <rect x="7" y="7" width="82" height="82" rx="20" fill="#0b1220"/>
+    <text x="48" y="67" text-anchor="middle" fill="#5fdcf5" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="54" font-weight="800">N</text>
+  </g>
+  <text x="126" y="65" fill="#edf5fb" font-family="Inter, ui-sans-serif, system-ui, Arial, sans-serif" font-size="54" font-weight="900" letter-spacing="-2.4">Nexus</text>
+</svg>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import nexusLogoUrl from "./assets/nexus-logo.svg";
 import "./wallet-ui-reset.css";
 import "./wallet-ui.css";
 
@@ -376,8 +377,7 @@ export function WalletUi({
       <main className="nw-shell">
         <div className="nw-brandbar" aria-hidden="true">
           <div className="nw-brandbar__identity">
-            <span className="nw-brandbar__mark">N</span>
-            <span className="nw-brandbar__name">Nexus</span>
+            <img className="nw-brandbar__logo" src={nexusLogoUrl} alt="Nexus" />
           </div>
           <div className="nw-brandbar__controls">
             <span className="nw-brandbar__social">Social</span>

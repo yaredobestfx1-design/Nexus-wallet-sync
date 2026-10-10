@@ -380,18 +380,8 @@
   margin-bottom: 31px;
   border-bottom: 1px solid rgba(124, 174, 192, .1);
 }
-.nw-brandbar__mark {
-  display: grid;
-  width: 38px;
-  height: 38px;
-  place-items: center;
-  border: 1px solid rgba(89, 215, 243, .78);
-  border-radius: 12px;
-  color: var(--nw-cyan);
-  box-shadow: inset 0 0 18px rgba(89, 215, 243, .12), 0 0 18px rgba(89, 215, 243, .2);
-  font: 700 14px/1 Inter, ui-sans-serif, system-ui, sans-serif;
-}
-.nw-brandbar__name { font-size: 20px; font-weight: 800; letter-spacing: -.04em; }
+.nw-brandbar__identity { width: 125px; flex: 0 0 125px; margin-left: -4px; }
+.nw-brandbar__logo { display: block; width: 125px; height: auto; }
 .nw-page-heading { gap: 13px; }
 .nw-page-heading__icon { width: 49px; height: 49px; border-radius: 14px; color: var(--nw-cyan); background: rgba(89, 215, 243, .09); }
 .nw-page-heading h1 { font-family: inherit; font-size: 27px; font-weight: 760; letter-spacing: -.045em; }
@@ -722,6 +712,10 @@
   .nw-activity--overview .nw-amount { font-size: 13px; }
   .nw-withdraw-form { padding: 18px; }
   .nw-static-select { min-height: 45px; }
+}
+@media (max-width: 375px) {
+  .nw-brandbar__identity { width: 110px; flex-basis: 110px; }
+  .nw-brandbar__logo { width: 110px; }
 }
 @media (min-width: 390px) and (max-width: 720px) {
   .nw-tabs { overflow-x: auto; }
