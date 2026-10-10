@@ -626,7 +626,6 @@ export function WalletUi({
                     <span>Requested withdrawal</span>
                     <strong>{draft.amount.trim() ? `${draft.amount} USDT` : "—"}</strong>
                   </div>
-                  <p>The requested amount is deducted from this shared balance when accepted. The 15% fee is paid separately.</p>
                 </div>
                 {withdrawalFeeLabel && (
                   <div className="nw-fee-row"><span>Fee estimate</span><strong>{withdrawalFeeLabel}</strong></div>
