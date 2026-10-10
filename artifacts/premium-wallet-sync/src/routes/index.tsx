@@ -57,19 +57,21 @@ function WalletPage() {
 
 
   function triggerNotifications(tx: Transaction) {
+    if (tx.kind === "deposit" && tx.status !== "approved") return;
+
     const isDeposit = tx.kind === "deposit";
     const amountLabel = `${tx.amount.toLocaleString()} USDT`;
+    const transactionStamp = fmtTime(tx.createdAt);
 
-    // Exchange-style push notification after 10s — timestamps captured at fire time
+    // Exchange-style push notification after 10s.
     const t1 = setTimeout(() => {
-      const now = Date.now();
-      const stamp = fmtTime(now);
+      const stamp = isDeposit ? transactionStamp : fmtTime(Date.now());
       pushNotif({
         id: `${tx.id}-ex`,
         variant: "exchange",
         title: isDeposit ? "USDT Deposit Successful" : "USDT Withdrawal Submitted",
         body: isDeposit
-          ? `You have successfully deposited ${amountLabel} at ${stamp}. If…`
+          ? "Your USDT deposit has been credited to your account."
           : `Your withdrawal request of ${amountLabel} at ${stamp} is being processed. If…`,
         time: stamp,
       });
@@ -77,8 +79,7 @@ function WalletPage() {
 
     // Email-style push notification 2s after the exchange one
     const t2 = setTimeout(() => {
-      const now = Date.now();
-      const stamp = fmtTime(now);
+      const stamp = isDeposit ? transactionStamp : fmtTime(Date.now());
       pushNotif({
         id: `${tx.id}-mail`,
         variant: "email",
