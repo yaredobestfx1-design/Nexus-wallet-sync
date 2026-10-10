@@ -17,9 +17,9 @@ import { addWithdraw, setBalance, useWallet, type Transaction } from "@/lib/wall
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Nexus Terminal — Wallet" },
+      { title: "Nexus" },
       { name: "description", content: "Manage your balance, deposits, withdrawals and activity." },
-      { property: "og:title", content: "Nexus Terminal — Wallet" },
+      { property: "og:title", content: "Nexus" },
       { property: "og:description", content: "Manage your balance, deposits, withdrawals and activity." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

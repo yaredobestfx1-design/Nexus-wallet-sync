@@ -1,6 +1,6 @@
 {
-  "name": "Nexus Terminal",
-  "short_name": "Nexus Terminal",
+  "name": "Nexus",
+  "short_name": "Nexus",
   "description": "Institutional Grade Liquidity Management",
   "start_url": "/",
   "display": "standalone",

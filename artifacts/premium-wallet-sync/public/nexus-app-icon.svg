@@ -1,14 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <title>Nexus Terminal</title>
+  <title>Nexus</title>
   <defs>
     <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#22d3ee"/>
       <stop offset="55%" stop-color="#0ea5e9"/>
       <stop offset="100%" stop-color="#2563eb"/>
     </linearGradient>
+    <filter id="soft-edges" x="-4%" y="-4%" width="108%" height="108%">
+      <feGaussianBlur stdDeviation="2.2"/>
+    </filter>
   </defs>
-  <rect width="512" height="512" fill="#000"/>
-  <rect width="512" height="512" rx="128" fill="url(#frame)"/>
-  <rect x="32" y="32" width="448" height="448" rx="96" fill="#0b1220"/>
-  <path d="M186 360V150h44l59 126V150h37v210h-43l-60-126v126z" fill="#5fdcf5"/>
+  <rect width="512" height="512" fill="#fff"/>
+  <g filter="url(#soft-edges)">
+    <rect width="512" height="512" rx="128" fill="url(#frame)"/>
+    <rect x="32" y="32" width="448" height="448" rx="96" fill="#0b1220"/>
+    <path d="M186 360V150h44l59 126V150h37v210h-43l-60-126v126z" fill="#5fdcf5"/>
+  </g>
 </svg>
