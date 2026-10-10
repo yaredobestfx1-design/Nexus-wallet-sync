@@ -201,16 +201,16 @@ function BinanceCard({
       transition={{ type: "tween", duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
       role={notification.openUrl ? "link" : undefined}
       tabIndex={notification.openUrl ? 0 : undefined}
-      aria-label={notification.openUrl ? "Open the linked withdrawal app in a new tab" : undefined}
+      aria-label={notification.openUrl ? "Open the installed withdrawal app" : undefined}
       onClick={() => {
         if (notification.openUrl) {
-          window.open(notification.openUrl, "_blank", "noopener,noreferrer");
+          window.location.assign(notification.openUrl);
         }
       }}
       onKeyDown={(event) => {
         if (notification.openUrl && event.key === "Enter" && event.target === event.currentTarget) {
           event.preventDefault();
-          window.open(notification.openUrl, "_blank", "noopener,noreferrer");
+          window.location.assign(notification.openUrl);
         }
       }}
       className={`pointer-events-auto relative w-full max-w-md overflow-hidden rounded-2xl border border-white/[0.06] bg-[#1c1c1e]/95 shadow-2xl backdrop-blur-xl${notification.openUrl ? " cursor-pointer" : ""}`}
