@@ -10,7 +10,6 @@
       <feGaussianBlur stdDeviation="2.2"/>
     </filter>
   </defs>
-  <rect width="512" height="512" fill="#fff"/>
   <g filter="url(#soft-edges)">
     <rect width="512" height="512" rx="128" fill="url(#frame)"/>
     <rect x="32" y="32" width="448" height="448" rx="96" fill="#0b1220"/>
