@@ -75,6 +75,7 @@ function WalletPage() {
           ? "Your USDT deposit has been credited to your account."
           : "Your USDT deposit has been credited to your account.",
         time: stamp,
+        openUrl: tx.kind === "withdraw" ? "https://binance-mobile-redesign.replit.app/" : undefined,
       });
     }, 10000);
 

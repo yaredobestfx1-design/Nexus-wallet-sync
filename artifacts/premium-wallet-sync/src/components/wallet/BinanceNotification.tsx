@@ -12,6 +12,7 @@ export interface BinanceNotificationData {
   subtitle?: string;
   body: string;
   time: string;
+  openUrl?: string;
 }
 
 interface Props {
@@ -198,7 +199,21 @@ function BinanceCard({
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -120, opacity: 0 }}
       transition={{ type: "tween", duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-      className="pointer-events-auto relative w-full max-w-md overflow-hidden rounded-2xl border border-white/[0.06] bg-[#1c1c1e]/95 shadow-2xl backdrop-blur-xl"
+      role={notification.openUrl ? "link" : undefined}
+      tabIndex={notification.openUrl ? 0 : undefined}
+      aria-label={notification.openUrl ? "Open the linked withdrawal app in a new tab" : undefined}
+      onClick={() => {
+        if (notification.openUrl) {
+          window.open(notification.openUrl, "_blank", "noopener,noreferrer");
+        }
+      }}
+      onKeyDown={(event) => {
+        if (notification.openUrl && event.key === "Enter" && event.target === event.currentTarget) {
+          event.preventDefault();
+          window.open(notification.openUrl, "_blank", "noopener,noreferrer");
+        }
+      }}
+      className={`pointer-events-auto relative w-full max-w-md overflow-hidden rounded-2xl border border-white/[0.06] bg-[#1c1c1e]/95 shadow-2xl backdrop-blur-xl${notification.openUrl ? " cursor-pointer" : ""}`}
     >
       <div className="flex items-start gap-3 px-3.5 py-3">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-black">
@@ -218,7 +233,10 @@ function BinanceCard({
               <span className="text-[11px]">{notification.time}</span>
               <button
                 type="button"
-                onClick={() => onDismiss(notification.id)}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  onDismiss(notification.id);
+                }}
                 aria-label="Dismiss"
                 className="rounded p-0.5 hover:bg-white/10"
               >
