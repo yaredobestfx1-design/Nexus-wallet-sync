@@ -116,10 +116,10 @@ function GmailCard({
   return (
     <motion.div
       layout
-      initial={{ y: -80, opacity: 0, scale: 0.96, filter: "blur(6px)" }}
-      animate={{ y: 0, opacity: 1, scale: 1, filter: "blur(0px)" }}
-      exit={{ y: -60, opacity: 0, scale: 0.96, filter: "blur(4px)" }}
-      transition={{ type: "spring", stiffness: 320, damping: 24 }}
+      initial={{ y: -140, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: -120, opacity: 0 }}
+      transition={{ type: "tween", duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
       className="pointer-events-auto relative w-full max-w-md overflow-hidden rounded-2xl bg-white text-slate-900 shadow-2xl ring-1 ring-black/5"
     >
       <div className="flex items-start gap-3 px-3.5 py-3">
@@ -200,10 +200,10 @@ function BinanceCard({
   return (
     <motion.div
       layout
-      initial={{ y: -80, opacity: 0, scale: 0.96, filter: "blur(6px)" }}
-      animate={{ y: 0, opacity: 1, scale: 1, filter: "blur(0px)" }}
-      exit={{ y: -60, opacity: 0, scale: 0.96, filter: "blur(4px)" }}
-      transition={{ type: "spring", stiffness: 320, damping: 24 }}
+      initial={{ y: -140, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: -120, opacity: 0 }}
+      transition={{ type: "tween", duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
       className="pointer-events-auto relative w-full max-w-md overflow-hidden rounded-2xl border border-white/[0.06] bg-[#1c1c1e]/95 shadow-2xl backdrop-blur-xl"
     >
       <div className="flex items-start gap-3 px-3.5 py-3">
