@@ -7,6 +7,6 @@
   "background_color": "#0a0f1a",
   "theme_color": "#0a0f1a",
   "icons": [
-    { "src": "/bloomberg-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/nexus-app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
   ]
 }

@@ -11,7 +11,6 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import iconAsset from "../assets/bloomberg-icon.png.asset.json";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -91,7 +90,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: iconAsset.url },
+      { rel: "icon", type: "image/svg+xml", href: "/nexus-app-icon.svg" },
       { rel: "manifest", href: "/manifest.webmanifest" },
     ],
   }),
