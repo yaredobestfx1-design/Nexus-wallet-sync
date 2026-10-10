@@ -141,9 +141,9 @@ function Icon({
 }) {
   const paths: Record<typeof name, ReactNode> = {
     wallet: <><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M3 9h18" /><path d="M16 14h2" /></>,
-    overview: <><rect x="3" y="3" width="8" height="8" rx="1.5" /><rect x="13" y="3" width="8" height="5" rx="1.5" /><rect x="13" y="10" width="8" height="11" rx="1.5" /><rect x="3" y="13" width="8" height="8" rx="1.5" /></>,
-    deposit: <><path d="M12 3v13" /><path d="m7 11 5 5 5-5" /><path d="M4 20h16" /></>,
-    withdraw: <><path d="M12 21V8" /><path d="m7 13 5-5 5 5" /><path d="M4 4h16" /></>,
+    overview: <><rect x="3" y="3" width="7" height="7" rx="1.2" /><rect x="14" y="3" width="7" height="7" rx="1.2" /><rect x="3" y="14" width="7" height="7" rx="1.2" /><rect x="14" y="14" width="7" height="7" rx="1.2" /></>,
+    deposit: <><path d="M12 4v15" /><path d="m6 13 6 6 6-6" /></>,
+    withdraw: <><path d="M12 20V5" /><path d="m6 11 6-6 6 6" /></>,
     history: <><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8" /><path d="M3 3v5h5" /><path d="M12 7v5l3 2" /></>,
     arrow: <><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>,
     check: <><path d="m5 12 4 4L19 6" /></>,

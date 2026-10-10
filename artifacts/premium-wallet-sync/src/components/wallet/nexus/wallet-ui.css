@@ -480,8 +480,8 @@
   .nw-balance-card__actions { grid-template-columns: 1fr 1fr; }
   .nw-button { min-height: 44px; padding-right: 10px; padding-left: 10px; font-size: 12px; }
   .nw-tabs { margin: 22px -14px 0; padding: 0 10px; }
-  .nw-tab { min-height: 45px; padding: 0 13px; font-size: 9px; }
-  .nw-tab svg { width: 14px; height: 14px; }
+  .nw-tab { min-height: 45px; padding: 0 13px; font-size: 10px; }
+  .nw-tab svg { width: 14px; height: 14px; stroke-width: 1.9; }
   .nw-view { margin-top: 16px; }
   .nw-card { padding: 18px; }
   .nw-overview__intro { gap: 16px; }
