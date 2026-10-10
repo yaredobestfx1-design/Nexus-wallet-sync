@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useEffect } from "react";
+import gmailLogoUrl from "../../assets/gmail-notification-logo.png";
 
 export type NotificationVariant = "exchange" | "email";
 
@@ -166,18 +167,11 @@ function GmailCard({
 
 function GmailLogo() {
   return (
-    <svg
-      viewBox="0 0 32 24"
-      className="mt-0.5 h-8 w-8 shrink-0 rounded-[9px] border border-slate-200 bg-white p-1"
-      aria-hidden="true"
-    >
-      <path fill="#4285F4" d="M2 4v16a2 2 0 0 0 2 2h4V10L2 4Z" />
-      <path fill="#34A853" d="M30 4v16a2 2 0 0 1-2 2h-4V10l6-6Z" />
-      <path fill="#FBBC05" d="M8 22V10l8 6 8-6v12H8Z" opacity="0" />
-      <path fill="#EA4335" d="M2 4h4l10 7.5L26 4h4L16 14 2 4Z" />
-      <path fill="#FBBC05" d="M8 22V10l8 6v6H8Z" />
-      <path fill="#C5221F" d="M24 22V10l-8 6v6h8Z" />
-    </svg>
+    <img
+      src={gmailLogoUrl}
+      alt=""
+      className="mt-0.5 h-8 w-8 shrink-0 rounded-[9px] border border-slate-200 bg-[#f1f1f1] object-contain"
+    />
   );
 }
 
