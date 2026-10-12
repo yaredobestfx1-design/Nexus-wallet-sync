@@ -132,17 +132,17 @@
 .nw-tabs { display: flex; gap: 8px; margin-top: 24px; overflow-x: auto; border-bottom: 1px solid var(--nw-border); scrollbar-width: thin; }
 .nw-tab {
   display: inline-flex;
-  min-height: 48px;
+  min-height: 44px;
   flex: 0 0 auto;
   align-items: center;
-  gap: 9px;
-  padding: 0 15px;
+  gap: 8px;
+  padding: 0 16px;
   border: 0;
   border-bottom: 2px solid transparent;
   color: var(--nw-muted);
   background: transparent;
   cursor: pointer;
-  font: 700 11px/1 "JetBrains Mono", ui-monospace, monospace;
+  font: 700 12px/1 "JetBrains Mono", ui-monospace, monospace;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
@@ -334,7 +334,7 @@
   .nw-balance-card__actions { width: 100%; flex: 0 0 auto; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .nw-button { padding-right: 12px; padding-left: 12px; font-size: 12px; }
   .nw-tabs { margin-top: 19px; }
-  .nw-tab { min-height: 45px; padding: 0 12px; font-size: 10px; }
+  .nw-tab { min-height: 44px; gap: 8px; padding: 0 16px; font-size: 12px; }
   .nw-card { padding: 18px; }
   .nw-overview__intro { align-items: flex-start; flex-direction: column; }
   .nw-overview__balance { width: 100%; }
@@ -450,10 +450,11 @@
 }
 .nw-tabs::-webkit-scrollbar { display: none; }
 .nw-tab {
-  min-height: 48px;
+  min-height: 44px;
   justify-content: center;
-  padding: 0 17px;
-  font: 650 10px/1 "JetBrains Mono", ui-monospace, monospace;
+  gap: 8px;
+  padding: 0 16px;
+  font: 650 12px/1 "JetBrains Mono", ui-monospace, monospace;
   letter-spacing: .11em;
 }
 .nw-tab--active { border-bottom-width: 2px; color: var(--nw-cyan); }
@@ -506,8 +507,8 @@
   .nw-balance-card__actions { grid-template-columns: 1fr 1fr; }
   .nw-button { min-height: 44px; padding-right: 10px; padding-left: 10px; font-size: 12px; }
   .nw-tabs { margin: 22px -14px 0; padding: 0 10px; }
-  .nw-tab { min-height: 45px; padding: 0 13px; font-size: 10px; }
-  .nw-tab svg { width: 14px; height: 14px; stroke-width: 1.9; }
+  .nw-tab { min-height: 44px; gap: 8px; padding: 0 16px; font-size: 12px; }
+  .nw-tab svg { width: 16px; height: 16px; stroke-width: 1.9; }
   .nw-view { margin-top: 16px; }
   .nw-card { padding: 18px; }
   .nw-overview__intro { gap: 16px; }
@@ -551,7 +552,7 @@
   .nw-shell { padding-right: 11px; padding-left: 11px; }
   .nw-brandbar { margin-right: -11px; margin-left: -11px; padding-right: 18px; padding-left: 18px; }
   .nw-tabs { margin-right: -11px; margin-left: -11px; }
-  .nw-tab svg { width: 14px; height: 14px; }
+  .nw-tab svg { width: 16px; height: 16px; }
   .nw-page-heading { align-items: center; }
   .nw-page-heading .nw-muted { max-width: 280px; }
   .nw-balance-card__actions { grid-template-columns: 1fr 1fr; }
@@ -565,7 +566,7 @@
 @media (min-width: 390px) and (max-width: 720px) {
   .nw-tabs { overflow-x: auto; scrollbar-width: none; }
   .nw-tabs::-webkit-scrollbar { display: none; }
-  .nw-tab { min-width: max-content; flex: 0 0 auto; gap: 6px; padding-right: 4px; padding-left: 4px; letter-spacing: .065em; }
+  .nw-tab { min-width: max-content; flex: 0 0 auto; gap: 8px; padding-right: 16px; padding-left: 16px; letter-spacing: .065em; }
 }
 
 /* Reference-matched Nexus overview. */
@@ -748,7 +749,7 @@
 }
 @media (min-width: 390px) and (max-width: 720px) {
   .nw-tabs { overflow-x: auto; }
-  .nw-tab { min-width: 116px; flex: 0 0 116px; }
+  .nw-tab { min-width: max-content; flex: 0 0 auto; }
 }
 
 /* Deposit screen styling based on the supplied mobile reference. */

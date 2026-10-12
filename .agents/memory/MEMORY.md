@@ -1,3 +1,4 @@
 - [Wallet overview content](wallet-overview-content.md) — screenshot marketing claims are user-approved; production balance and activity stay app-sourced.
 - [Wallet deposit reference copy](wallet-deposit-reference-copy.md) — deposits stay disabled in demo mode; avoid unverified checkout, minimum, fee, or proof claims.
 - [Nexus mobile dock sizing](nexus-mobile-dock-sizing.md) — icons 18px, labels 9px, tabs at least 52px tall plus bottom safe area.
+- [Wallet section tab sizing](wallet-section-tab-sizing.md) — tabs use 44px height, 16px icons, 12px labels, 16px side padding, and content-based widths.
