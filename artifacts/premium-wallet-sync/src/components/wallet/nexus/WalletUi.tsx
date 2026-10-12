@@ -778,8 +778,8 @@ export function WalletUi({
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19V5M4 19h17" /><path d="m7 15 4-4 3 2 5-6" /></svg>
           <span>Terminal</span>
         </span>
-        <span className="nw-app-dock__item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="7" width="16" height="13" rx="2" /><path d="M9 7V4h6v3M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01" /></svg>
+        <span className="nw-app-dock__item nw-app-dock__item--ai">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 7V4" /><circle cx="12" cy="3" r="1" /><rect x="4" y="8" width="16" height="12" rx="2.5" /><path d="M2 13h2M20 13h2" /><path d="M9 13v2M15 13v2" /></svg>
           <span>AI</span>
         </span>
         <span className="nw-app-dock__item nw-app-dock__item--active">

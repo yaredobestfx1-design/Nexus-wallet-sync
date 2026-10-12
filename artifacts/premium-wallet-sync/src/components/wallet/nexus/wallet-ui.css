@@ -542,6 +542,9 @@
     line-height: 1.1;
   }
   .nw-app-dock__item svg { width: 19px; height: 19px; }
+  .nw-app-dock__item--ai { gap: 5px; }
+  .nw-app-dock__item--ai svg { width: 24px; height: 24px; stroke-width: 1.8; }
+  .nw-app-dock__item--ai span { font-size: 12px; line-height: 1.1; }
   .nw-app-dock__item--active { color: var(--nw-cyan); font-weight: 700; }
 }
 @media (max-width: 460px) {
