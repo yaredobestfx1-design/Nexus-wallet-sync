@@ -536,12 +536,12 @@
     min-width: 0;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    gap: 5px;
     flex-direction: column;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.1;
   }
-  .nw-app-dock__item svg { width: 19px; height: 19px; }
+  .nw-app-dock__item svg { width: 24px; height: 24px; stroke-width: 1.9; }
   .nw-app-dock__item--ai { gap: 5px; }
   .nw-app-dock__item--ai svg { width: 24px; height: 24px; stroke-width: 1.8; }
   .nw-app-dock__item--ai span { font-size: 12px; line-height: 1.1; }
