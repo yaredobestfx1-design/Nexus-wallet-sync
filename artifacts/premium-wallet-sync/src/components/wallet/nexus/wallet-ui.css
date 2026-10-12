@@ -101,6 +101,32 @@
 .nw-button--primary:hover { box-shadow: 0 7px 27px rgba(50, 194, 223, .28); }
 .nw-button--outline { border-color: var(--nw-border-strong); background: rgba(6, 18, 32, .64); }
 .nw-button--outline:hover { background: rgba(65, 197, 225, .08); }
+.nw-balance-card__actions {
+  display: grid;
+  flex: 0 1 430px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(100%, 430px);
+  gap: 16px;
+}
+.nw-balance-card__actions .nw-button {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 16px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.nw-balance-card__actions .nw-button svg { display: none; }
+.nw-balance-card__actions .nw-button--outline {
+  border-color: rgba(79, 209, 240, .42);
+  background: rgba(7, 35, 49, .74);
+  color: var(--nw-text);
+}
+.nw-balance-card__actions .nw-button--primary {
+  border-color: transparent;
+  background: linear-gradient(110deg, #08d2e7, #09bde9);
+  box-shadow: 0 8px 26px rgba(0, 198, 231, .16);
+}
 .nw-button--full { width: 100%; margin-top: 21px; }
 .nw-button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 .nw-tabs { display: flex; gap: 8px; margin-top: 24px; overflow-x: auto; border-bottom: 1px solid var(--nw-border); scrollbar-width: thin; }
@@ -305,7 +331,7 @@
 @media (max-width: 720px) {
   .nw-shell { width: min(100% - 28px, 1180px); padding-top: 25px; }
   .nw-balance-card { align-items: flex-start; flex-direction: column; gap: 18px; padding: 20px; }
-  .nw-balance-card__actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
+  .nw-balance-card__actions { width: 100%; flex: 0 0 auto; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .nw-button { padding-right: 12px; padding-left: 12px; font-size: 12px; }
   .nw-tabs { margin-top: 19px; }
   .nw-tab { min-height: 45px; padding: 0 12px; font-size: 10px; }
