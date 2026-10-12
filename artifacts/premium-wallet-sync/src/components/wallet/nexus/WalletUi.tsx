@@ -786,7 +786,7 @@ export function WalletUi({
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M3 9h18M16 14h2" /></svg>
           <span>Wallet</span>
         </span>
-        <span className="nw-app-dock__item">
+        <span className="nw-app-dock__item nw-app-dock__item--plans">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="m20.6 13.4-8.9 8.1a2 2 0 0 1-2.8-.1L2.6 15a2 2 0 0 1-.1-2.8l8.1-8.9a2 2 0 0 1 1.5-.7h6.3a2 2 0 0 1 2 2v6.3a2 2 0 0 1-.7 1.5Z" /><circle cx="16.5" cy="7.5" r="1" /></svg>
           <span>Plans</span>
         </span>
