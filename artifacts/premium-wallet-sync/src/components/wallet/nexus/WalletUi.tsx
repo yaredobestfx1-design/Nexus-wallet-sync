@@ -339,6 +339,7 @@ export function WalletUi({
   const [depositAmount, setDepositAmount] = useState(depositAmountLabel ?? "");
   const visibleDraft = withdrawalView.draft ?? draft;
   const receipt = withdrawalView.receipt;
+  const balanceParts = balanceState === "ready" ? balanceLabel.match(/^(.+?)(\.\d{2})$/) : null;
 
   useEffect(() => {
     const navigation = tabNavRef.current;
@@ -399,7 +400,13 @@ export function WalletUi({
           <div>
             <p className="nw-eyebrow"><span className="nw-live-dot" />{balanceCaption}</p>
             <p className={`nw-balance nw-balance--${balanceState}`} onClick={onBalanceClick} style={onBalanceClick ? { cursor: "pointer" } : undefined}>
-              {balanceState === "loading" ? "Loading…" : balanceState === "unavailable" ? "Unavailable" : balanceLabel}
+              {balanceState === "loading"
+                ? "Loading…"
+                : balanceState === "unavailable"
+                  ? "Unavailable"
+                  : balanceParts
+                    ? <><span>{balanceParts[1]}</span><span className="nw-balance__decimal">{balanceParts[2]}</span></>
+                    : balanceLabel}
             </p>
             <p className="nw-muted nw-balance-card__caption">
               Persistent Terminal balance · available for trading and withdrawals

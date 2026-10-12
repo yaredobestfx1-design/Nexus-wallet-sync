@@ -2,3 +2,4 @@
 - [Wallet deposit reference copy](wallet-deposit-reference-copy.md) — deposits stay disabled in demo mode; avoid unverified checkout, minimum, fee, or proof claims.
 - [Nexus mobile dock sizing](nexus-mobile-dock-sizing.md) — icons 18px, labels 9px, tabs at least 52px tall plus bottom safe area.
 - [Wallet section tab sizing](wallet-section-tab-sizing.md) — tabs use 44px height, 16px icons, 12px labels, 16px side padding, and content-based widths.
+- [Special-account Wallet display rule](wallet-special-account-display.md) — standard layout is shared; the special notice and history row belong only to the special-account flow.
